@@ -1,0 +1,77 @@
+import java.util.*;
+
+class Bank {
+    private String AccName;
+    private long AccNum;
+    private double balance;
+    private double amount;
+
+    protected void setAccName(String AccName) {
+        this.AccName = AccName;
+    }
+
+    protected void setAccNum(long AccNum) {
+        this.AccNum = AccNum;
+    }
+
+    protected void setBalance(double amt) {   // deposit
+        if (amt > 0) {
+            balance += amt;
+        }
+    }
+
+    public String getAccName() {
+        return AccName;
+    }
+
+    public long getAccNum() {
+        return AccNum;
+    }
+
+    protected boolean withdraw(double amount) {
+        if (amount > 0 && amount <= balance) {
+            this.amount = amount;
+            balance -= amount;  
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        String AccName = sc.nextLine();
+        long AccNum = sc.nextLong();
+        double balance = sc.nextDouble();
+        double amt = sc.nextDouble();
+
+        Bank ob = new Bank();
+
+        ob.setAccName(AccName);
+        ob.setAccNum(AccNum);
+        ob.setBalance(balance);
+
+        System.out.println(ob.getAccName());
+        System.out.println(ob.getAccNum());
+        System.out.println("Deposited Amount is: " + balance);
+
+        if (ob.withdraw(amt)) {
+            System.out.println("Debited Amount is: " + ob.getAmount());
+            System.out.println("Remaining Balance is: " + ob.getBalance()); 
+            System.out.println("Transaction Successfully Completed");
+        } else {
+            System.out.println("Amount Invalid");
+        }
+    }
+}
